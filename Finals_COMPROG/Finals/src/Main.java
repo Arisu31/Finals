@@ -8,5 +8,4 @@ public class Main {
         Frame a = new Frame();
         a.init();
     }
-
 }

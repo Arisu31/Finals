@@ -8,11 +8,9 @@ import javax.swing.table.TableRowSorter;
 public class customTable extends JTable {
 
     customTableModel model = new customTableModel(this);
-    TableRowSorter<customTableModel> sorter = new TableRowSorter<>();
 
     public customTable(){
         this.setModel(model);
-//        this.setRowSorter(sorter);
     }
 
     @Override
