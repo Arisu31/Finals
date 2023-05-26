@@ -11,10 +11,12 @@ public class customTable extends JTable {
 
     public customTable(){
         this.setModel(model);
+        this.getTableHeader().setReorderingAllowed(false);
     }
 
     @Override
     public customTableModel getModel() {
         return model;
     }
+
 }

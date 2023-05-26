@@ -5,6 +5,8 @@ import Controller.ConnectionController;
 import Controller.TableController;
 import Interfaces.IConnector;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +15,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Vector;
 
-public class customTableModel extends AbstractTableModel {
+public class customTableModel extends AbstractTableModel implements TableModelListener {
 
+    int index;
     TableController controller = new TableController();
     IConnector connector = new ConnectionController();
     customTable table;
@@ -25,17 +28,9 @@ public class customTableModel extends AbstractTableModel {
     Vector<Vector> rows;
 
     public customTableModel(customTable table){
-        try{
-            try(PreparedStatement pt = connector.getConnection().prepareStatement("select * from test")){
-                this.table = table;
-                resultSet = pt.executeQuery();
-                metaData = resultSet.getMetaData();
-                columns = controller.getColumnNames(resultSet);
-                rows = controller.getRowData(resultSet);
-            }
-        }catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
-        }
+        this.table = table;
+        this.addTableModelListener(this);
+        loadData();
     }
 
     @Override
@@ -62,5 +57,34 @@ public class customTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
+    }
+
+    public IConnector getConnector() {
+        return connector;
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        switch (e.getType()){
+            case 0 -> rows.remove(index);
+            default -> System.out.println("NOMAS!");
+        }
+    }
+
+    public void loadData(){
+        try{
+            try(PreparedStatement pt = connector.getConnection().prepareStatement("select * from test")){
+                resultSet = pt.executeQuery();
+                metaData = resultSet.getMetaData();
+                columns = controller.getColumnNames(resultSet);
+                rows = controller.getRowData(resultSet);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void getIndexOnAction(int i){
+        this.index = i;
     }
 }
