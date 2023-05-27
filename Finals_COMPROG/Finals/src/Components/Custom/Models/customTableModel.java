@@ -65,6 +65,7 @@ public class customTableModel extends AbstractTableModel implements TableModelLi
 
     @Override
     public void tableChanged(TableModelEvent e) {
+        System.out.println(rows.size() + " row size");
         switch (e.getType()){
             case 0 -> rows.remove(index);
             default -> System.out.println("NOMAS!");

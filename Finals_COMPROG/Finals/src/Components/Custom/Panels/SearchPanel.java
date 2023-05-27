@@ -41,6 +41,10 @@ public class SearchPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
+        search();
+    }
+
+    public void search(){
         sorter.setRowFilter(RowFilter.regexFilter(search.getText().trim()));
         table.setRowSorter(sorter);
     }

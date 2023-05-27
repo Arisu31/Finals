@@ -30,6 +30,7 @@ public class Frame extends JFrame {
         constraints.fill =  GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
         constraints.gridy = 0;
+        table.setSearch(search);
         this.add(search, constraints);
         constraints.gridx = 0;
         constraints.gridy = 1;

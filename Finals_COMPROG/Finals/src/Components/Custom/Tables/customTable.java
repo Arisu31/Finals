@@ -1,16 +1,21 @@
 package Components.Custom.Tables;
 
 import Components.Custom.Models.customTableModel;
+import Components.Custom.Panels.SearchPanel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableRowSorter;
 
 public class customTable extends JTable {
 
     customTableModel model = new customTableModel(this);
+    SearchPanel search;
 
     public customTable(){
         this.setModel(model);
+        this.setSelectionModel(new customSelectionModel(this));
         this.getTableHeader().setReorderingAllowed(false);
     }
 
@@ -19,4 +24,30 @@ public class customTable extends JTable {
         return model;
     }
 
+    public void setSearch(SearchPanel search){
+        this.search = search;
+    }
+
+    public SearchPanel getSearch(){
+        return search;
+    }
+
+}
+
+class customSelectionModel extends DefaultListSelectionModel implements ListSelectionListener{
+
+    customTable table;
+
+    public customSelectionModel(customTable table){
+        this.table = table;
+        this.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        this.addListSelectionListener(this);
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if(!e.getValueIsAdjusting()){
+            System.out.println(table.getSelectedRow() + " selection event");
+        }
+    }
 }
