@@ -11,61 +11,55 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class AddPanel extends JFrame implements ActionListener {
+public class UpdatePanel extends JFrame implements ActionListener {
 
+    int rowIndex;
     customTable table;
     JTextField nameField = new JTextField(10);
     JTextField occupationField = new JTextField(10);
 
-    public AddPanel(customTable table){
+    public UpdatePanel(customTable table, int row){
         this.table = table;
+        rowIndex = row;
     }
 
     public void init(){
         GridBagConstraints constraints = new GridBagConstraints();
-        JLabel idLabel = new JLabel("ID: ");
-        JLabel count = new JLabel(String.valueOf(ConnectionController.getLatestIDCOUNT()));
         JLabel nameLabel = new JLabel("Name: ");
         JLabel occupationLabel = new JLabel("Occupation: ");
-        JButton add = new JButton("Add");
+        JButton update = new JButton("Update");
         Insets commonInset = new Insets(10,15,10,15);
 
         this.setLayout(new GridBagLayout());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(300,200));
-        this.setTitle("Add product");
+        this.setTitle("Update product");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
-        constraints.gridx = 0;
-        constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        constraints.insets = commonInset;
-        add.addActionListener(this);
-        this.add(idLabel, constraints);
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        constraints.insets = commonInset;
-        this.add(count, constraints);
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 0;
         constraints.insets = commonInset;
         this.add(nameLabel, constraints);
         constraints.gridx = 1;
-        constraints.gridy = 1;
+        constraints.gridy = 0;
+        nameField.setText(String.valueOf(table.getModel().getValueAt(rowIndex, 1)));
         this.add(nameField, constraints);
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         this.add(occupationLabel, constraints);
         constraints.gridx = 1;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         constraints.weightx = 1;
         constraints.weighty = 1;
+        occupationField.setText(String.valueOf(table.getModel().getValueAt(rowIndex, 2)));
         this.add(occupationField, constraints);
         constraints.gridx = 1;
-        constraints.gridy = 3;
+        constraints.gridy = 2;
         constraints.insets = new Insets(0,0,0,0);
-        this.add(add, constraints);
+        update.addActionListener(this);
+        this.add(update, constraints);
 
         this.setVisible(true);
     }
@@ -73,19 +67,19 @@ public class AddPanel extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Vector<Object> tmp = new Vector<>();
-        Object a = ConnectionController.getLatestIDCOUNT();
-        Object b = nameField.getText().trim();
-        Object c = occupationField.getText().trim();
+        Object id = table.getModel().getValueAt(rowIndex, 0);
+        Object a = nameField.getText().trim();
+        Object b = occupationField.getText().trim();
+        tmp.add(id);
         tmp.add(a);
         tmp.add(b);
-        tmp.add(c);
         try{
-            try(PreparedStatement pt = table.getModel().getConnector().getConnection().prepareStatement("insert into test (ID, Name, Occupation) values (?,?,?)")){
+            try(PreparedStatement pt = table.getModel().getConnector().getConnection().prepareStatement("update test set Name=?, Occupation=? where ID=? ")){
                 pt.setObject(1, a);
                 pt.setObject(2, b);
-                pt.setObject(3, c);
+                pt.setObject(3, id);
                 pt.executeUpdate();
-                table.getModel().getRows().add(tmp);
+                table.getModel().getRows().set(table.getSelectedRow(), tmp);
                 table.getModel().fireTableDataChanged();
                 this.dispose();
             }

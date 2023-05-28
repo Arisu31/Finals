@@ -15,6 +15,7 @@ public class customTable extends JTable {
 
     public customTable(){
         this.setModel(model);
+        this.setRowSorter(new TableRowSorter<>(model));
         this.setSelectionModel(new customSelectionModel(this));
         this.getTableHeader().setReorderingAllowed(false);
     }
@@ -34,20 +35,12 @@ public class customTable extends JTable {
 
 }
 
-class customSelectionModel extends DefaultListSelectionModel implements ListSelectionListener{
+class customSelectionModel extends DefaultListSelectionModel{
 
     customTable table;
 
     public customSelectionModel(customTable table){
         this.table = table;
         this.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        this.addListSelectionListener(this);
-    }
-
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if(!e.getValueIsAdjusting()){
-            System.out.println(table.getSelectedRow() + " selection event");
-        }
     }
 }

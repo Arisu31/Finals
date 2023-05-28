@@ -24,7 +24,10 @@ public class Delete extends JButton implements ActionListener {
                     .getConnection().prepareStatement("delete from test where ID=?")){
                 pt.setObject(1, table.getValueAt(table.getSelectedRow(), 0));
                 if(pt.executeUpdate() == 1){
-                    table.getModel().getIndexOnAction(table.getSelectedRow());
+
+                    table.getModel().getRows().remove(
+                            table.getModel().getRows().get(
+                                    table.getRowSorter().convertRowIndexToModel(table.getSelectedRow())));
                     table.getModel().fireTableDataChanged();
                     table.getSearch().search();
                 }

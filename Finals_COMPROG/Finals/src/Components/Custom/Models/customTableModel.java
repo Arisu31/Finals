@@ -15,9 +15,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Vector;
 
-public class customTableModel extends AbstractTableModel implements TableModelListener {
-
-    int index;
+public class customTableModel extends AbstractTableModel{
     TableController controller = new TableController();
     IConnector connector = new ConnectionController();
     customTable table;
@@ -28,9 +26,17 @@ public class customTableModel extends AbstractTableModel implements TableModelLi
     Vector<Vector> rows;
 
     public customTableModel(customTable table){
-        this.table = table;
-        this.addTableModelListener(this);
-        loadData();
+        try{
+            try(PreparedStatement pt = connector.getConnection().prepareStatement("select * from test")){
+                this.table = table;
+                resultSet = pt.executeQuery();
+                metaData = resultSet.getMetaData();
+                columns = controller.getColumnNames(resultSet);
+                rows = controller.getRowData(resultSet);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
@@ -64,30 +70,6 @@ public class customTableModel extends AbstractTableModel implements TableModelLi
         return connector;
     }
 
-    @Override
-    public void tableChanged(TableModelEvent e) {
-        switch (e.getType()){
-            case TableModelEvent.UPDATE -> rows.remove(index);
-            default -> System.out.println("NOMAS!");
-        }
-    }
-
-    public void loadData(){
-        try{
-            try(PreparedStatement pt = connector.getConnection().prepareStatement("select * from test")){
-                resultSet = pt.executeQuery();
-                metaData = resultSet.getMetaData();
-                columns = controller.getColumnNames(resultSet);
-                rows = controller.getRowData(resultSet);
-            }
-        }catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-    public void getIndexOnAction(int i){
-        this.index = i;
-    }
     public Vector<Vector> getRows(){
         return rows;
     }
