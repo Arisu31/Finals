@@ -1,5 +1,6 @@
 package Components;
 
+import Components.Custom.Buttons.Add;
 import Components.Custom.Buttons.Delete;
 import Components.Custom.Panels.SearchPanel;
 import Components.Custom.Tables.customTable;
@@ -42,6 +43,10 @@ public class Frame extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.insets = new Insets(5,5,5,5);
+        this.add(new Add(table), constraints);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.insets = new Insets(5,90,5,5);
         this.add(delete, constraints);
         constraints.weightx = 1;
         constraints.weighty = 1;

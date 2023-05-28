@@ -49,6 +49,7 @@ public class customTableModel extends AbstractTableModel implements TableModelLi
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object getValueAt(int row, int column) {
         Vector<Objects> temp = rows.elementAt(row);
         return temp.elementAt(column);
@@ -65,9 +66,8 @@ public class customTableModel extends AbstractTableModel implements TableModelLi
 
     @Override
     public void tableChanged(TableModelEvent e) {
-        System.out.println(rows.size() + " row size");
         switch (e.getType()){
-            case 0 -> rows.remove(index);
+            case TableModelEvent.UPDATE -> rows.remove(index);
             default -> System.out.println("NOMAS!");
         }
     }
@@ -87,5 +87,8 @@ public class customTableModel extends AbstractTableModel implements TableModelLi
 
     public void getIndexOnAction(int i){
         this.index = i;
+    }
+    public Vector<Vector> getRows(){
+        return rows;
     }
 }
