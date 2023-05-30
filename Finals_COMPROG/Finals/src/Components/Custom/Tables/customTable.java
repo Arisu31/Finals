@@ -4,8 +4,6 @@ import Components.Custom.Models.customTableModel;
 import Components.Custom.Panels.SearchPanel;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableRowSorter;
 
 public class customTable extends JTable {

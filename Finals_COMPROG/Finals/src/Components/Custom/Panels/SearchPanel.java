@@ -11,9 +11,9 @@ import java.awt.event.KeyListener;
 
 public class SearchPanel extends JPanel implements KeyListener {
 
-    customTable table;
-    JTextField search = new JTextField(20);
-    TableRowSorter<customTableModel> sorter;
+    final customTable table;
+    final JTextField search = new JTextField(20);
+    final TableRowSorter<customTableModel> sorter;
 
     public SearchPanel(customTable table){
         this.table = table;
