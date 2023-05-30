@@ -1,7 +1,6 @@
 package Components.Custom.Buttons;
 
-import Components.Custom.Panels.AddPanel;
-import Components.Custom.Panels.UpdatePanel;
+import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Tables.customTable;
 
 import javax.swing.*;
@@ -10,10 +9,10 @@ import java.awt.event.ActionListener;
 
 public class Update extends JButton implements ActionListener {
 
-    customTable table;
+    private final customTable table = customTable.getInstance();
 
-    public Update(customTable table){
-        this.table = table;
+
+    public Update(){
         this.setText("Update");
         this.addActionListener(this);
     }
@@ -21,8 +20,7 @@ public class Update extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if(table.getSelectedRow() >= 0){
-            UpdatePanel panel = new UpdatePanel(table, table.getSelectedRow());
-            panel.init();
+            InformationPanel.getInstance().updateEvent();
         }else{
             JOptionPane.showMessageDialog(null, "No row selected", "Error", JOptionPane.ERROR_MESSAGE);
         }

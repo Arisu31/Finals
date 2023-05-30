@@ -1,10 +1,8 @@
 package Components;
 
-import Components.Custom.Buttons.Add;
-import Components.Custom.Buttons.Delete;
-import Components.Custom.Buttons.Update;
+import Components.Custom.Panels.CenterPanel;
+import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Panels.SearchPanel;
-import Components.Custom.Tables.customTable;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
@@ -12,52 +10,20 @@ import java.awt.*;
 
 public class Frame extends JFrame {
 
-    public Frame(){}
-
     public void init(){
         FlatLightLaf.setup();
-        GridBagConstraints constraints = new GridBagConstraints();
-        customTable table = new customTable();
-        JScrollPane scrollPane = new JScrollPane(table);
-        SearchPanel search = new SearchPanel(table);
-        Delete delete = new Delete(table);
+        CenterPanel centerPanel = CenterPanel.getInstance();
+        SearchPanel search = new SearchPanel();
+        InformationPanel informationPanel = InformationPanel.getInstance();
 
-        this.setLayout(new GridBagLayout());
-        this.setTitle("Test table");
-        this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+        this.setTitle("Point of Sale");
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(new Dimension(750,600));
 
-        constraints.anchor = GridBagConstraints.PAGE_START;
-        constraints.fill =  GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        table.setSearch(search);
-        this.add(search, constraints);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        scrollPane.setFocusable(false);
-        table.setFocusable(false);
-        this.add(scrollPane, constraints);
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.insets = new Insets(5,5,5,5);
-        this.add(new Add(table), constraints);
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.insets = new Insets(5,90,5,5);
-        this.add(new Update(table), constraints);
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.insets = new Insets(5,175,5,5);
-        this.add(delete, constraints);
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        this.add(Box.createRigidArea(new Dimension(0,0)), constraints);
+        this.add(search, BorderLayout.NORTH);
+        this.add(centerPanel, BorderLayout.CENTER);
+        this.add(informationPanel, BorderLayout.EAST);
 
         this.setVisible(true);
     }

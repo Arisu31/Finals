@@ -1,20 +1,29 @@
 package Components.Custom.Tables;
 
 import Components.Custom.Models.customTableModel;
-import Components.Custom.Panels.SearchPanel;
+import Components.Custom.Panels.InformationPanel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableRowSorter;
 
 public class customTable extends JTable {
 
-    customTableModel model = new customTableModel(this);
-    SearchPanel search;
+    final customTableModel model = new customTableModel(this);
+    private static customTable instance;
 
-    public customTable(){
+    public static customTable getInstance(){
+        if(instance == null){
+            instance = new customTable();
+        }
+        return instance;
+    }
+
+    private customTable(){
         this.setModel(model);
         this.setRowSorter(new TableRowSorter<>(model));
-        this.setSelectionModel(new customSelectionModel(this));
+        this.setSelectionModel(new customSelectionModel());
         this.getTableHeader().setReorderingAllowed(false);
     }
 
@@ -23,22 +32,19 @@ public class customTable extends JTable {
         return model;
     }
 
-    public void setSearch(SearchPanel search){
-        this.search = search;
-    }
-
-    public SearchPanel getSearch(){
-        return search;
-    }
-
 }
 
-class customSelectionModel extends DefaultListSelectionModel{
+class customSelectionModel extends DefaultListSelectionModel implements ListSelectionListener {
 
-    customTable table;
-
-    public customSelectionModel(customTable table){
-        this.table = table;
+    public customSelectionModel(){
         this.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        this.addListSelectionListener(this);
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if(!e.getValueIsAdjusting() && customTable.getInstance().getSelectedRow() >= 0){
+            InformationPanel.getInstance().setFields(customTable.getInstance().getSelectedRow());
+        }
     }
 }

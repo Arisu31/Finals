@@ -11,12 +11,11 @@ import java.awt.event.KeyListener;
 
 public class SearchPanel extends JPanel implements KeyListener {
 
-    final customTable table;
+    private final customTable table = customTable.getInstance();
     final JTextField search = new JTextField(20);
     final TableRowSorter<customTableModel> sorter;
 
-    public SearchPanel(customTable table){
-        this.table = table;
+    public SearchPanel(){
         sorter = new TableRowSorter<>(table.getModel());
         init();
     }

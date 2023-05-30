@@ -1,39 +1,27 @@
 package Components.Custom.Buttons;
 
+import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Tables.customTable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class Delete extends JButton implements ActionListener {
-    customTable table;
+    private final customTable table = customTable.getInstance();
 
-    public Delete(customTable table){
+
+    public Delete(){
         this.setText("Delete");
         this.addActionListener(this);
-        this.table = table;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try{
-            try(PreparedStatement pt = table.getModel().getConnector()
-                    .getConnection().prepareStatement("delete from test where ID=?")){
-                pt.setObject(1, table.getValueAt(table.getSelectedRow(), 0));
-                if(pt.executeUpdate() == 1){
-
-                    table.getModel().getRows().remove(
-                            table.getModel().getRows().get(
-                                    table.getRowSorter().convertRowIndexToModel(table.getSelectedRow())));
-                    table.getModel().fireTableDataChanged();
-                    table.getSearch().search();
-                }
-            }
-        }catch (SQLException ex){
-            throw new RuntimeException(ex.getMessage());
+        if(table.getSelectedRow() >= 0){
+            InformationPanel.getInstance().deleteEvent();
+        }else{
+            JOptionPane.showMessageDialog(null, "No row selected", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

@@ -5,8 +5,6 @@ import Controller.ConnectionController;
 import Controller.TableController;
 import Interfaces.IConnector;
 
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +14,8 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class customTableModel extends AbstractTableModel{
-    TableController controller = new TableController();
-    IConnector connector = new ConnectionController();
+    final TableController controller = new TableController();
+    final IConnector connector = new ConnectionController();
     customTable table;
     ResultSetMetaData metaData;
     ResultSet resultSet;
@@ -61,15 +59,11 @@ public class customTableModel extends AbstractTableModel{
         return temp.elementAt(column);
     }
 
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
-    }
-
     public IConnector getConnector() {
         return connector;
     }
 
+    @SuppressWarnings("rawtypes")
     public Vector<Vector> getRows(){
         return rows;
     }

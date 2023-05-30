@@ -9,17 +9,14 @@ import java.awt.event.ActionListener;
 
 public class Add extends JButton implements ActionListener {
 
-    customTable table;
-
-    public Add(customTable table){
-        this.table = table;
+    public Add(){
         this.setText("Add");
         this.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        AddPanel panel = new AddPanel(table);
+        AddPanel panel = new AddPanel(customTable.getInstance());
         panel.init();
     }
 }
