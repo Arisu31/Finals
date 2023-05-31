@@ -99,4 +99,11 @@ public class InformationPanel extends JPanel {
         quantityField.setText(String.valueOf(table.getValueAt(row, 2)));
         priceField.setText(String.valueOf(table.getValueAt(row, 3)));
     }
+
+    public void nullifyOnDelete(){
+        idLabel.setText("");
+        nameField.setText("");
+        quantityField.setText("");
+        priceField.setText("");
+    }
 }

@@ -1,5 +1,6 @@
 package Components.Custom.Buttons;
 
+import Components.Custom.Panels.CenterPanel;
 import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Tables.customTable;
 
@@ -20,6 +21,7 @@ public class Delete extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(table.getSelectedRow() >= 0){
             InformationPanel.getInstance().deleteEvent();
+            InformationPanel.getInstance().nullifyOnDelete();
         }else{
             JOptionPane.showMessageDialog(null, "No row selected", "Error", JOptionPane.ERROR_MESSAGE);
         }
