@@ -1,6 +1,5 @@
 package Components.Custom.Buttons;
 
-import Components.Custom.Panels.CenterPanel;
 import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Tables.customTable;
 

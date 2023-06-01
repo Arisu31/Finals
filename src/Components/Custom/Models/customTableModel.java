@@ -5,8 +5,6 @@ import Controller.ConnectionController;
 import Controller.TableController;
 import Interfaces.IConnector;
 
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

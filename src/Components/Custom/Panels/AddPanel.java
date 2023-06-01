@@ -98,6 +98,7 @@ public class AddPanel extends JFrame implements ActionListener {
                 pt.executeUpdate();
                 table.getModel().getRows().add(tmp);
                 table.getModel().fireTableDataChanged();
+                InformationPanel.getInstance().updateTotalEvent();
                 this.dispose();
             }
         }catch (SQLException e){
