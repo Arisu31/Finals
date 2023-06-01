@@ -2,6 +2,8 @@ package Components.Custom.Panels;
 
 import Components.Custom.Buttons.Checkout;
 import Components.Custom.Tables.customTable;
+import Util.Colors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.PreparedStatement;
@@ -36,7 +38,7 @@ public class InformationPanel extends JPanel {
 
         this.setLayout(new GridBagLayout());
         this.setSize(new Dimension(450,500));
-        this.setBackground(Color.BLUE);
+        this.setBackground(Colors.PRIMARY);
 
         constraints.anchor = GridBagConstraints.PAGE_START;
         constraints.gridy = 0;
@@ -75,7 +77,7 @@ public class InformationPanel extends JPanel {
         constraints.gridy = 7;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        constraints.insets = new Insets(180,-260,5,0);
+        constraints.insets = new Insets(180,-240,5,0);
         this.add(new Checkout(), constraints);
     }
 

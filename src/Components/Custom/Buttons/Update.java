@@ -2,6 +2,7 @@ package Components.Custom.Buttons;
 
 import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Tables.customTable;
+import Util.Icons;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ public class Update extends JButton implements ActionListener {
     public Update(){
         this.setText("Update");
         this.addActionListener(this);
+        this.setIcon(Icons.UPDATE);
     }
 
     @Override

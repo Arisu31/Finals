@@ -3,6 +3,7 @@ package Components;
 import Components.Custom.Panels.CenterPanel;
 import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Panels.SearchPanel;
+import Util.Icons;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
@@ -17,9 +18,11 @@ public class Frame extends JFrame {
         InformationPanel informationPanel = InformationPanel.getInstance();
 
         this.setLayout(new BorderLayout());
-        this.setTitle("Point of Sale");
+        this.setTitle("Basic-Sale O' Matic");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setSize(new Dimension(750,600));
+        this.setResizable(false);
+        this.setIconImage(Icons.ICON);
+        this.setSize(new Dimension(750,700));
 
         this.add(search, BorderLayout.NORTH);
         this.add(centerPanel, BorderLayout.CENTER);

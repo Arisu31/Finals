@@ -2,6 +2,7 @@ package Components.Custom.Buttons;
 
 import Components.Custom.Panels.InformationPanel;
 import Components.Custom.Tables.customTable;
+import Util.Icons;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ public class Delete extends JButton implements ActionListener {
     public Delete(){
         this.setText("Delete");
         this.addActionListener(this);
+        this.setIcon(Icons.DELETE);
     }
 
     @Override

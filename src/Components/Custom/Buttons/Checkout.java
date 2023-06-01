@@ -1,6 +1,7 @@
 package Components.Custom.Buttons;
 
 import Components.Custom.Panels.InformationPanel;
+import Util.Icons;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ public class Checkout extends JButton implements ActionListener {
     public Checkout(){
         this.setText("Checkout");
         this.addActionListener(this);
+        this.setIcon(Icons.RIGHT);
     }
 
     @Override
