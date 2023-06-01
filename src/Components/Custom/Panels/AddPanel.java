@@ -78,6 +78,7 @@ public class AddPanel extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Vector<Object> tmp = new Vector<>();
