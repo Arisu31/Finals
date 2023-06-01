@@ -20,6 +20,7 @@ public class Frame extends JFrame {
         this.setLayout(new BorderLayout());
         this.setTitle("Basic-Sale O' Matic");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setIconImage(Icons.ICON);
         this.setSize(new Dimension(750,700));
