@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/Components/Custom/Buttons/Delete.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Components/Custom/Models/customTableModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Components/Custom/Panels/AddPanel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Components/Custom/Panels/InformationPanel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Controller/ConnectionController.java" dialect="GenericSQL" />
+    <file url="PROJECT" dialect="MySQL" />
+  </component>
+</project>
