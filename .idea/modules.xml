@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/testTable.iml" filepath="$PROJECT_DIR$/testTable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/func_table.iml" filepath="$PROJECT_DIR$/func_table.iml" />
     </modules>
   </component>
 </project>

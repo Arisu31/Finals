@@ -2,6 +2,7 @@ package Components.Custom.Panels;
 
 import Components.Custom.Models.customTableModel;
 import Components.Custom.Tables.customTable;
+import Util.Icons;
 
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
@@ -21,7 +22,7 @@ public class SearchPanel extends JPanel implements KeyListener {
     }
 
     void init(){
-        JLabel label = new JLabel("Search: ");
+        JLabel label = new JLabel(Icons.SEARCH);
 
         this.setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
         search.addKeyListener(this);

@@ -38,15 +38,15 @@ public class CenterPanel extends JPanel {
         constraints.anchor = GridBagConstraints.LINE_START;
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.insets = new Insets(5,5,5,5);
+        constraints.insets = new Insets(5,15,5,5);
         this.add(new Add(), constraints);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.insets = new Insets(5,90,5,5);
+        constraints.insets = new Insets(5,95,5,5);
         this.add(new Update(), constraints);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.insets = new Insets(5,175,5,5);
+        constraints.insets = new Insets(5,190,5,5);
         this.add(new Delete(), constraints);
         constraints.weightx = 1;
         constraints.weighty = 1;
