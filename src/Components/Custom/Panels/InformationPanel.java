@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Vector;
 
 public class InformationPanel extends JPanel {
@@ -18,7 +17,7 @@ public class InformationPanel extends JPanel {
     final JTextField quantityField = new JTextField(10);
     final JTextField priceField = new JTextField(10);
     final JTextField totalField = new JTextField(10);
-    final Font boldy = new Font("Segoe UI",Font.BOLD, 16);
+    final Font weighted = new Font("Segoe UI",Font.BOLD, 16);
 
     public static InformationPanel getInstance(){
         if(instance == null){
@@ -42,32 +41,32 @@ public class InformationPanel extends JPanel {
         constraints.anchor = GridBagConstraints.PAGE_START;
         constraints.gridy = 0;
         constraints.insets = new Insets(5,0,5,115);
-        idLabel.setFont(boldy);
+        idLabel.setFont(weighted);
         this.add(idLabel, constraints);
         constraints.gridy = 1;
         constraints.insets = new Insets(5,0,5,90);
-        nameLabel.setFont(boldy);
+        nameLabel.setFont(weighted);
         this.add(nameLabel, constraints);
         constraints.gridy = 2;
         constraints.insets = commonField;
         this.add(nameField, constraints);
         constraints.gridy = 3;
         constraints.insets = new Insets(5,0,5,70);
-        quantityLabel.setFont(boldy);
+        quantityLabel.setFont(weighted);
         this.add(quantityLabel, constraints);
         constraints.gridy = 4;
         constraints.insets = commonField;
         this.add(quantityField, constraints);
         constraints.gridy = 5;
         constraints.insets = new Insets(5,0,5,95);
-        priceLabel.setFont(boldy);
+        priceLabel.setFont(weighted);
         this.add(priceLabel, constraints);
         constraints.gridy = 6;
         constraints.insets = commonField;
         this.add(priceField, constraints);
         constraints.gridy = 7;
         constraints.insets = new Insets(100,-100,5,0);
-        totalLabel.setFont(boldy);
+        totalLabel.setFont(weighted);
         this.add(totalLabel, constraints);
         constraints.gridy = 7;
         constraints.insets = new Insets(140,-220,5,0);
@@ -80,6 +79,7 @@ public class InformationPanel extends JPanel {
         this.add(new Checkout(), constraints);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     public void updateEvent(){
         Vector<Object> tmp = new Vector<>();
         Object id = table.getModel().getValueAt(table.getSelectedRow(), 0);
@@ -125,10 +125,11 @@ public class InformationPanel extends JPanel {
 
     public void checkOutEvent(){
         try{
-            try(PreparedStatement pt =table.getModel().getConnector().getConnection().prepareStatement("delete from test")){
+            try(PreparedStatement pt =table.getModel().getConnector().getConnection().prepareStatement("truncate test")){
                 pt.executeUpdate();
                 table.getModel().getRows().removeAllElements();
                 updateTotalEvent();
+                nullifyOnDelete();
                 table.getModel().fireTableDataChanged();
             }
         }catch (SQLException e){
